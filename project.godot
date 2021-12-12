@@ -48,13 +48,6 @@ config/name="action_rpg"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
-IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
-UserData="*res://addons/github-integration/scripts/user_data.gd"
-RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
-
 [display]
 
 window/size/width=320
@@ -66,7 +59,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/github-integration/plugin.cfg", "res://addons/wakatime/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/wakatime/plugin.cfg" )
 
 [gdnative]
 
