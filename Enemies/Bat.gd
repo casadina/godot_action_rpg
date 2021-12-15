@@ -14,5 +14,4 @@ func _on_Hurtbox_area_entered(area):
 		stats.health -= area.damage
 
 func _on_Stats_no_health():
-	queue_free()
-	
+	print('You batted a bat out of the air like a baseball!')
