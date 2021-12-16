@@ -2,14 +2,13 @@ extends Area2D
 
 var player = null
 
-
+func can_see_player():
+	return player
+	
+	
 func _on_PlayerDetectionZone_body_entered(body):
 	player = body
 	
-
-func can_see_player():
-	return true if player else false
-
-func _on_PlayerDetectionZone_area_exited(area):
-	print('exited')
+	
+func _on_PlayerDetectionZone_body_exited(body):
 	player = null

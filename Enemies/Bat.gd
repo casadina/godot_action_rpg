@@ -36,13 +36,10 @@ func _physics_process(delta):
 			pass
 		CHASE:
 			var player = player_detection_zone.player
-			print(player)
 			if player:
-				var direction = global_position.direction_to(player.global_position)
+				var direction = (global_position.direction_to(player.global_position).normalized())
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-				player = player_detection_zone.player
 			else:
-				print('not chasing')
 				state = IDLE
 			sprite.flip_h = velocity.x < 0
 	velocity = move_and_slide(velocity)
