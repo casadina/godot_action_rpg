@@ -1,6 +1,10 @@
 extends Node2D
 
-class_name Grass
+class_name Vegetation
+
+# Right now all details are specific to grass_effect.
+# Make sure to overwrite details if that is not wanted.
+
 const GRASS_EFFECT = preload("res://Effects/grass_effect.tscn")
 
 onready var stats = $Stats
@@ -13,6 +17,7 @@ func create_grass_effect():
 
 
 func _on_Hurtbox_area_entered(area):
+	print('ok')
 	if area.get_name() == "SwordHitbox":
 		create_grass_effect()
 		stats.health -= area.damage

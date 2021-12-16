@@ -9,19 +9,55 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "AnimatedSprite",
+"class": "Effect",
+"language": "GDScript",
+"path": "res://Effects/effect.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Enemies/Bat.gd"
+}, {
 "base": "",
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
 }, {
+"base": "Node2D",
+"class": "Grass",
+"language": "GDScript",
+"path": "res://World/grass.gd"
+}, {
 "base": "Area2D",
 "class": "HitBox",
 "language": "GDScript",
 "path": "res://Overlap/hitbox.gd"
+}, {
+"base": "Node",
+"class": "Stats",
+"language": "GDScript",
+"path": "res://Stats.gd"
+}, {
+"base": "HitBox",
+"class": "Sword",
+"language": "GDScript",
+"path": "res://Player/sword_hitbox.gd"
+}, {
+"base": "Node2D",
+"class": "Vegetation",
+"language": "GDScript",
+"path": "res://Vegetation.gd"
 } ]
 _global_script_class_icons={
+"Effect": "",
+"Enemy": "",
 "GitAPI": "",
-"HitBox": ""
+"Grass": "",
+"HitBox": "",
+"Stats": "",
+"Sword": "",
+"Vegetation": ""
 }
 
 [application]

@@ -19,10 +19,13 @@ onready var animation_player = $AnimationPlayer
 onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
 onready var sword_hitbox = $HitboxPivot/SwordHitbox
+onready var group_type = add_to_group('player')
+
 
 func _ready():
 	animation_tree.active = true
 	sword_hitbox.knockback_vector = roll_vector
+
 
 func _process(delta):
 	match state:
@@ -32,6 +35,7 @@ func _process(delta):
 			roll_state(	delta)
 		ATTACK:
 			attack_state(delta)
+
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -60,21 +64,26 @@ func move_state(delta):
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
 		
+		
 func roll_state(delta):
 	velocity = roll_vector * ROLL_SPEED
 	animation_state.travel("Roll")
 	move()
 
+
 func attack_state(delta):
 	velocity = Vector2.ZERO
 	animation_state.travel("Attack")
 	
+	
 func move():
 	velocity = move_and_slide(velocity)
+	
 	
 func roll_animation_finished():
 	velocity = velocity 
 	state = MOVE
+
 
 func attack_animation_finished():
 	state = MOVE
