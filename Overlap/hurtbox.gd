@@ -7,6 +7,7 @@ var hit_effect = hit_types[1]
 
 export(bool) var show_hit = true
 
+
 func _on_Hurtbox_area_entered(area):
 	if get_parent().is_in_group("enemy"):
 		var effect = hit_effect.instance()
