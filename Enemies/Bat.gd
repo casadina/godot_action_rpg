@@ -1,10 +1,13 @@
 extends KinematicBody2D
 
+class_name Enemy
+
 const ENEMY_DEATH_EFFECT = preload("res://Effects/enemy_death_effect.tscn")
 
 var knockback = Vector2.ZERO
 
 onready var stats = $Stats
+onready var group_type = add_to_group("enemy")
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
