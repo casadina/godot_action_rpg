@@ -11,6 +11,7 @@ enum {
 	ATTACK
 }
 
+var knockback = Vector2.ZERO
 var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
@@ -21,10 +22,11 @@ onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
 onready var sword_hitbox = $HitboxPivot/SwordHitbox
 onready var group_type = add_to_group('player')
+onready var hurtbox = $Hurtbox
 
 
 func _ready():
-	stats.connect("no_health", self, "queue_free")
+	# stats.connect("no_health", self, "queue_free")
 	animation_tree.active = true
 	sword_hitbox.knockback_vector = roll_vector
 
@@ -61,6 +63,7 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("roll"):
+		hurtbox.start_invincibility(0.5)
 		state = ROLL
 	
 	if Input.is_action_just_pressed("attack"):
@@ -93,6 +96,7 @@ func attack_animation_finished():
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= 1
-	print('ouch')
-	if stats.health == 0:
-		print('I died.')
+	hurtbox.start_invincibility(0.5)
+	hurtbox.create_hit_effect()
+	print(stats.health)
+	

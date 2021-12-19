@@ -1,7 +1,5 @@
 extends Node
 
-class_name Stats
-
 export(int) var max_health = 1
 onready var health: int = max_health setget set_health
 

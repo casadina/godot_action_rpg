@@ -11,4 +11,5 @@ func _on_PlayerDetectionZone_body_entered(body):
 	
 	
 func _on_PlayerDetectionZone_body_exited(body):
+	print(body)
 	player = null

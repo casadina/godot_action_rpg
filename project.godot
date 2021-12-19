@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "AnimatedSprite",
-"class": "Effect",
-"language": "GDScript",
-"path": "res://effects/effect.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -34,30 +29,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://overlap/hitbox.gd"
 }, {
-"base": "Node",
-"class": "Stats",
-"language": "GDScript",
-"path": "res://stats.gd"
-}, {
 "base": "HitBox",
 "class": "Sword",
 "language": "GDScript",
 "path": "res://player/sword_hitbox.gd"
-}, {
-"base": "Node2D",
-"class": "Vegetation",
-"language": "GDScript",
-"path": "res://vegetation.gd"
 } ]
 _global_script_class_icons={
-"Effect": "",
 "Enemy": "",
 "GitAPI": "",
 "Grass": "",
 "HitBox": "",
-"Stats": "",
-"Sword": "",
-"Vegetation": ""
+"Sword": ""
 }
 
 [application]

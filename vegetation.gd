@@ -1,11 +1,9 @@
 extends Node2D
 
-class_name Vegetation
-
 # Right now all details are specific to grass_effect.
 # Make sure to overwrite details if that is not wanted.
 
-const GRASS_EFFECT = preload("res://Effects/grass_effect.tscn")
+const GRASS_EFFECT = preload("res://effects/grass_effect.tscn")
 
 onready var stats = $Stats
 
