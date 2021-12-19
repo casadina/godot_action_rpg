@@ -9,15 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "AnimatedSprite",
-"class": "Effect",
-"language": "GDScript",
-"path": "res://Effects/effect.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://Enemies/Bat.gd"
+"path": "res://enemies/bat.gd"
 }, {
 "base": "",
 "class": "GitAPI",
@@ -27,44 +22,35 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Grass",
 "language": "GDScript",
-"path": "res://World/grass.gd"
+"path": "res://world/grass.gd"
 }, {
 "base": "Area2D",
 "class": "HitBox",
 "language": "GDScript",
-"path": "res://Overlap/hitbox.gd"
-}, {
-"base": "Node",
-"class": "Stats",
-"language": "GDScript",
-"path": "res://Stats.gd"
+"path": "res://overlap/hitbox.gd"
 }, {
 "base": "HitBox",
 "class": "Sword",
 "language": "GDScript",
-"path": "res://Player/sword_hitbox.gd"
-}, {
-"base": "Node2D",
-"class": "Vegetation",
-"language": "GDScript",
-"path": "res://Vegetation.gd"
+"path": "res://player/sword_hitbox.gd"
 } ]
 _global_script_class_icons={
-"Effect": "",
 "Enemy": "",
 "GitAPI": "",
 "Grass": "",
 "HitBox": "",
-"Stats": "",
-"Sword": "",
-"Vegetation": ""
+"Sword": ""
 }
 
 [application]
 
 config/name="action_rpg"
-run/main_scene="res://World.tscn"
+run/main_scene="res://world.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+PlayerStats="*res://player/player_stats.tscn"
 
 [display]
 
