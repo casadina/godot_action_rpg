@@ -1,8 +1,10 @@
 extends Node2D
 
 class_name Grass
+
 const GRASS_EFFECT = preload("res://effects/grass_effect.tscn")
 
+onready var group_type = add_to_group("enemy")
 onready var stats = $Stats
 
 

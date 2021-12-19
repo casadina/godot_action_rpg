@@ -37,7 +37,7 @@ func _physics_process(delta):
 			pass
 		CHASE:
 			var player = player_detection_zone.player
-			if player:
+			if player && is_instance_valid(player):
 				var direction = (global_position.direction_to(player.global_position).normalized())
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 			else:
@@ -47,7 +47,7 @@ func _physics_process(delta):
 			
 
 func seek_player():
-	if player_detection_zone.can_see_player():
+	if player_detection_zone.can_see_player() && is_instance_valid(player_detection_zone.can_see_player()):
 		state = CHASE
 	else:
 		state = IDLE

@@ -1,6 +1,8 @@
 extends Node
 
 export(int) var max_health = 1
+export(bool) var is_player = false
+
 onready var health: int = max_health setget set_health
 
 signal no_health
@@ -13,4 +15,5 @@ func set_health(value):
 
 
 func _on_Stats_no_health():
-	self.get_parent().queue_free()
+	if self.get_parent().is_in_group('enemy'):
+		self.get_parent().queue_free()
