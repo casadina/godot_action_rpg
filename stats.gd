@@ -6,10 +6,12 @@ export(bool) var is_player = false
 onready var health: int = max_health setget set_health
 
 signal no_health
+signal health_changed(value)
 
 
 func set_health(value):
 	health = value
+	emit_signal("health_changed", value)
 	if health <= 0:
 		emit_signal("no_health")
 
