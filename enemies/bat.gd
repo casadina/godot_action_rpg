@@ -45,26 +45,24 @@ func _physics_process(delta) -> void:
 				state = IDLE
 			sprite.flip_h = velocity.x < 0
 			
-	if soft_collision.is_colliding():
-		velocity += soft_collision.get_push_vector() * delta * 400
-	velocity = move_and_slide(velocity)
+	velocity = move_and_slide(velocity + soft_collision.get_push_vector())
 			
 
-func seek_player():
+func seek_player() -> void:
 	if player_detection_zone.can_see_player() && is_instance_valid(player_detection_zone.can_see_player()):
 		state = CHASE
 	else:
 		state = IDLE
 
 
-func _on_Hurtbox_area_entered(area):
+func _on_Hurtbox_area_entered(area) -> void:
 	if area.get_name() == "SwordHitbox":
 		knockback = area.knockback_vector * 120
 		stats.health -= area.damage
 		hurtbox.create_hit_effect()
 
 
-func _on_Stats_no_health():
+func _on_Stats_no_health() -> void:
 	print('You batted a bat out of the air like a baseball!')
 	var enemy_death_effect = ENEMY_DEATH_EFFECT.instance()
 	get_parent().add_child(enemy_death_effect)
