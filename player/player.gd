@@ -71,13 +71,13 @@ func move_state(delta):
 		state = ATTACK
 		
 		
-func roll_state(delta):
+func roll_state(_delta):
 	velocity = roll_vector * ROLL_SPEED
 	animation_state.travel("Roll")
 	move()
 
 
-func attack_state(delta):
+func attack_state(_delta):
 	velocity = Vector2.ZERO
 	animation_state.travel("Attack")
 	
@@ -95,8 +95,7 @@ func attack_animation_finished():
 	state = MOVE
 
 
-func _on_Hurtbox_area_entered(area):
+func _on_Hurtbox_area_entered(_area):
 	stats.health -= 1
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
-	print(self.is_in_group('player'))
