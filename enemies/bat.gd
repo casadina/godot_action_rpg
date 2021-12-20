@@ -4,9 +4,9 @@ class_name Enemy
 
 const ENEMY_DEATH_EFFECT = preload("res://effects/enemy_death_effect.tscn")
 
-export var ACCELERATION = 300
-export var MAX_SPEED = 50
-export var FRICTION = 200
+export(int) var ACCELERATION = 300
+export(int) var MAX_SPEED = 50
+export(int) var FRICTION = 200
 
 enum {
 	IDLE,
@@ -14,19 +14,19 @@ enum {
 	CHASE
 }
 
-var velocity = Vector2.ZERO
-var knockback = Vector2.ZERO
-var state = CHASE
+var velocity := Vector2.ZERO
+var knockback := Vector2.ZERO
+var state := CHASE
 
-onready var sprite = $AnimatedSprite
-onready var stats = $Stats
-onready var player_detection_zone = $PlayerDetectionZone
+onready var sprite := $AnimatedSprite
+onready var stats := $Stats
+onready var player_detection_zone := $PlayerDetectionZone
 onready var group_type = add_to_group("enemy")
-onready var hurtbox = $Hurtbox
-onready var soft_collision = $SoftCollision
+onready var hurtbox := $Hurtbox
+onready var soft_collision := $SoftCollision
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
 	knockback = move_and_slide(knockback)
 	
