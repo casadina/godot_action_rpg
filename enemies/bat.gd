@@ -44,7 +44,6 @@ func _physics_process(delta) -> void:
 			else:
 				state = IDLE
 			sprite.flip_h = velocity.x < 0
-			
 	velocity = move_and_slide(velocity + soft_collision.get_push_vector())
 			
 

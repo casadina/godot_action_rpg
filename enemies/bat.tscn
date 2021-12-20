@@ -60,6 +60,7 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "Fly"
+frame = 1
 playing = true
 offset = Vector2( 0, -12 )
 
