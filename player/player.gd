@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
-export var ACCELERATION = 500
-export var MAX_SPEED = 80
-export var ROLL_SPEED = 125
-export var FRICTION = 500
+export(int) var ACCELERATION = 500
+export(int) var MAX_SPEED = 80
+export(int) var ROLL_SPEED = 125
+export(int) var FRICTION = 500
 
 enum {
 	MOVE,
@@ -11,28 +11,28 @@ enum {
 	ATTACK
 }
 
-var knockback = Vector2.ZERO
-var state = MOVE
-var velocity = Vector2.ZERO
-var roll_vector = Vector2.DOWN
-var stats = PlayerStats
+var knockback := Vector2.ZERO
+var state := MOVE
+var velocity := Vector2.ZERO
+var roll_vector: = Vector2.DOWN
+var stats := PlayerStats
+var death_error
 
-
-onready var animation_player = $AnimationPlayer
-onready var animation_tree = $AnimationTree
+onready var animation_player := $AnimationPlayer
+onready var animation_tree := $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
-onready var sword_hitbox = $HitboxPivot/SwordHitbox
+onready var sword_hitbox := $HitboxPivot/SwordHitbox
 onready var group_type = add_to_group('player')
-onready var hurtbox = $Hurtbox
+onready var hurtbox := $Hurtbox
 
 
-func _ready():
-	stats.connect("no_health", self, "queue_free")
+func _ready() -> void:
+	death_error = stats.connect("no_health", self, "queue_free")
 	animation_tree.active = true
 	sword_hitbox.knockback_vector = roll_vector
 
 
-func _process(delta):
+func _process(delta) -> void:
 	match state:
 		MOVE: 
 			move_state(delta)
@@ -42,8 +42,8 @@ func _process(delta):
 			attack_state(delta)
 
 
-func move_state(delta):
-	var input_vector = Vector2.ZERO
+func move_state(delta) -> void:
+	var input_vector := Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
@@ -71,32 +71,31 @@ func move_state(delta):
 		state = ATTACK
 		
 		
-func roll_state(delta):
+func roll_state(_delta) -> void:
 	velocity = roll_vector * ROLL_SPEED
 	animation_state.travel("Roll")
 	move()
 
 
-func attack_state(delta):
+func attack_state(_delta) -> void:
 	velocity = Vector2.ZERO
 	animation_state.travel("Attack")
 	
 	
-func move():
+func move() -> void:
 	velocity = move_and_slide(velocity)
 	
 	
-func roll_animation_finished():
+func roll_animation_finished() -> void:
 	velocity = velocity 
 	state = MOVE
 
 
-func attack_animation_finished():
+func attack_animation_finished() -> void:
 	state = MOVE
 
 
-func _on_Hurtbox_area_entered(area):
+func _on_Hurtbox_area_entered(_area) -> void:
 	stats.health -= 1
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
-	print(self.is_in_group('player'))
