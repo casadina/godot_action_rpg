@@ -1,6 +1,8 @@
 extends Area2D
 
+
 var areas: Array
+
 
 func is_colliding() -> bool:
 	areas = get_overlapping_areas()
@@ -12,6 +14,6 @@ func get_push_vector() -> Vector2:
 	var push_vector: Vector2 = Vector2.ZERO
 	if is_colliding():
 		var area: Area2D = areas[0]
-		push_vector = area.global_position.direction_to(global_position)
+		push_vector = area.global_position.direction_to(global_position) * 10
 	return push_vector
 	
