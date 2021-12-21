@@ -11,5 +11,5 @@ func _on_PlayerDetectionZone_body_entered(body) -> void:
 	player = body
 	
 	
-func _on_PlayerDetectionZone_body_exited(body) -> void:
+func _on_PlayerDetectionZone_body_exited(_body) -> void:
 	player = null
