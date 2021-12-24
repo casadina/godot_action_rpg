@@ -118,3 +118,7 @@ func _on_Hurtbox_invincibility_started():
 
 func _on_Hurtbox_invincibility_ended():
 	blink_animation_player.stop_blink()
+
+
+func _on_NextMap_area_entered(area):
+	print(area)
