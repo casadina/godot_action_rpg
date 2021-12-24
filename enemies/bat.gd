@@ -34,6 +34,7 @@ onready var animation_player := $AnimationPlayer
 
 func _ready():
 	state = pick_random_state(wander_states)
+	stats.attack = 3
 
 
 func _physics_process(delta) -> void:
@@ -96,7 +97,7 @@ func idle_or_wander() -> void:
 func _on_Hurtbox_area_entered(area) -> void:
 	if area.get_name() == "SwordHitbox":
 		knockback = area.knockback_vector * 120
-		stats.health -= area.damage
+		stats.health -= area.total_damage
 		hurtbox.create_hit_effect()
 		hurtbox.start_invincibility(0.4)
 

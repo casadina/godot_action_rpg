@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 const PLAYER_HURT_SOUND = preload("res://player/player_hurt_sound.tscn")
 
 export(int) var ACCELERATION = 500
@@ -19,6 +21,7 @@ var velocity := Vector2.ZERO
 var roll_vector: = Vector2.DOWN
 var stats := PlayerStats
 var death_error
+var enemy_attack
 
 onready var animation_player := $AnimationPlayer
 onready var animation_tree := $AnimationTree
@@ -100,8 +103,9 @@ func attack_animation_finished() -> void:
 	state = MOVE
 
 
-func _on_Hurtbox_area_entered(_area) -> void:
-	stats.health -= 1
+func _on_Hurtbox_area_entered(area: Area2D) -> void:
+	enemy_attack = area.get_parent().stats.attack
+	stats.health -= enemy_attack
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
 	var player_hurt_sound = PLAYER_HURT_SOUND.instance()
