@@ -109,8 +109,8 @@ func _on_Hurtbox_area_entered(_area) -> void:
 	
 
 func _on_Hurtbox_invincibility_started():
-	blink_animation_player.play("Start")
-	
+	blink_animation_player.play_blink()
+
 
 func _on_Hurtbox_invincibility_ended():
-	blink_animation_player.play("Stop")
+	blink_animation_player.stop_blink()
