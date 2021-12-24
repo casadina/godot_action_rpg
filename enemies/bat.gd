@@ -30,9 +30,11 @@ onready var group_type = add_to_group("enemy")
 onready var hurtbox := $Hurtbox
 onready var soft_collision := $SoftCollision
 onready var wander_controller := $WanderController
+onready var animation_player := $AnimationPlayer
 
 func _ready():
 	state = pick_random_state(wander_states)
+	stats.attack = 3
 
 
 func _physics_process(delta) -> void:
@@ -81,12 +83,12 @@ func seek_player() -> void:
 		idle_or_wander()
 		
 		
-func pick_random_state(state_list):
+func pick_random_state(state_list) -> int:
 	state_list.shuffle()
 	return state_list.pop_front()
 	
 
-func idle_or_wander():
+func idle_or_wander() -> void:
 	if wander_controller.get_time_left() == 0:
 		state = pick_random_state([IDLE, WANDER])
 		wander_controller.set_wander_timer(rand_range(1, 3))
@@ -95,8 +97,9 @@ func idle_or_wander():
 func _on_Hurtbox_area_entered(area) -> void:
 	if area.get_name() == "SwordHitbox":
 		knockback = area.knockback_vector * 120
-		stats.health -= area.damage
+		stats.health -= area.total_damage
 		hurtbox.create_hit_effect()
+		hurtbox.start_invincibility(0.4)
 
 
 func _on_Stats_no_health() -> void:
@@ -105,3 +108,10 @@ func _on_Stats_no_health() -> void:
 	get_parent().add_child(enemy_death_effect)
 	enemy_death_effect.global_position = global_position
 
+
+func _on_Hurtbox_invincibility_started() -> void:
+	animation_player.play_blink()
+
+
+func _on_Hurtbox_invincibility_ended() -> void:
+	animation_player.stop_blink()

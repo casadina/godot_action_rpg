@@ -1,5 +1,9 @@
 extends KinematicBody2D
 
+class_name Player
+
+const PLAYER_HURT_SOUND = preload("res://player/player_hurt_sound.tscn")
+
 export(int) var ACCELERATION = 500
 export(int) var MAX_SPEED = 80
 export(int) var ROLL_SPEED = 125
@@ -17,6 +21,7 @@ var velocity := Vector2.ZERO
 var roll_vector: = Vector2.DOWN
 var stats := PlayerStats
 var death_error
+var enemy_attack
 
 onready var animation_player := $AnimationPlayer
 onready var animation_tree := $AnimationTree
@@ -24,6 +29,8 @@ onready var animation_state = animation_tree.get("parameters/playback")
 onready var sword_hitbox := $HitboxPivot/SwordHitbox
 onready var group_type = add_to_group('player')
 onready var hurtbox := $Hurtbox
+onready var sound := $AudioStreamPlayer
+onready var blink_animation_player = $BlinkAnimationPlayer
 
 
 func _ready() -> void:
@@ -96,7 +103,22 @@ func attack_animation_finished() -> void:
 	state = MOVE
 
 
-func _on_Hurtbox_area_entered(_area) -> void:
-	stats.health -= 1
+func _on_Hurtbox_area_entered(area: Area2D) -> void:
+	enemy_attack = area.get_parent().stats.attack
+	stats.health -= enemy_attack
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
+	var player_hurt_sound = PLAYER_HURT_SOUND.instance()
+	get_tree().current_scene.add_child(player_hurt_sound)
+	
+
+func _on_Hurtbox_invincibility_started():
+	blink_animation_player.play_blink()
+
+
+func _on_Hurtbox_invincibility_ended():
+	blink_animation_player.stop_blink()
+
+
+func _on_NextMap_area_entered(area):
+	print(area)

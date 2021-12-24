@@ -2,6 +2,7 @@ extends Node
 
 export(int) var max_health = 1 setget set_max_health
 export(bool) var is_player = false
+export(int) var attack = 1
 
 onready var health: int = max_health setget set_health
 

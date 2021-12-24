@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://world/bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://enemies/bat.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/health_ui.tscn" type="PackedScene" id=8]
 [ext_resource path="res://world/tree.tscn" type="PackedScene" id=9]
+[ext_resource path="res://camera_2d.tscn" type="PackedScene" id=10]
+[ext_resource path="res://world.gd" type="Script" id=11]
+[ext_resource path="res://next_map.tscn" type="PackedScene" id=12]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -485,9 +488,10 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/z_index = 0
 
 [node name="World" type="Node2D"]
+script = ExtResource( 11 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 160, 90 )
+position = Vector2( 152, 88 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( -160, -128, 608, 400 )
@@ -505,11 +509,33 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 0, 0, 4, 1, 0, 196609, 2, 0, 196609, 3, 0, 6, 4, 0, 1, 5, 0, 2, 7, 0, 196608, 8, 0, 196609, 9, 0, 6, 10, 0, 2, 65536, 0, 65539, 65539, 0, 131072, 65540, 0, 131073, 65541, 0, 131074, 65545, 0, 65540, 65546, 0, 131074, 131072, 0, 65539, 131081, 0, 65539, 196608, 0, 131076, 196609, 0, 2, 196613, 0, 3, 196617, 0, 65539, 262144, 0, 65536, 262145, 0, 65538, 262149, 0, 131076, 262150, 0, 1, 262151, 0, 2, 262153, 0, 131075, 327680, 0, 131072, 327681, 0, 131074, 327684, 0, 196608, 327685, 0, 196614, 327686, 0, 131073, 327687, 0, 131074 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Boundary" type="TileMap" parent="."]
+tile_set = SubResource( 49 )
+cell_size = Vector2( 32, 32 )
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -131067, 0, 4, -131066, 0, 196609, -131065, 0, 7, -65531, 0, 131075, -65529, 0, 131075, 262154, 0, 196608, 262155, 0, 7, 327691, 0, 65539, 393217, 0, 3, 393219, 0, 3, 393224, 0, 196608, 393225, 0, 196609, 393226, 0, 196609, 393227, 0, 196615, 458753, 0, 196612, 458754, 0, 196609, 458755, 0, 196615 )
+
+[node name="NextMap" parent="." instance=ExtResource( 12 )]
+position = Vector2( 208, -16 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="NextMap2" parent="." instance=ExtResource( 12 )]
+position = Vector2( 336, 176 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="NextMap3" parent="." instance=ExtResource( 12 )]
+position = Vector2( 80, 208 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="Camera2D" parent="." instance=ExtResource( 10 )]
 position = Vector2( 80, 160 )
-current = true
-smoothing_enabled = true
-smoothing_speed = 3.0
+
+[node name="BottomRight" parent="Camera2D/Limits" index="1"]
+position = Vector2( 320, 192 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -635,4 +661,5 @@ margin_top = 5.0
 margin_right = 67.0
 margin_bottom = 16.0
 
+[editable path="Camera2D"]
 [editable path="CanvasLayer/HealthUI"]
